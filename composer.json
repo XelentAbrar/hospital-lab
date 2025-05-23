@@ -1,0 +1,22 @@
+{
+  "name": "xelent-abrar/hospital-donation",
+  "description": "A Laravel package to manage donation.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "XelentAbrar\\HospitalDonation\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "XelentAbrar\\HospitalDonation\\HospitalDonationServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "illuminate/support": "^10.0"
+  }
+}
