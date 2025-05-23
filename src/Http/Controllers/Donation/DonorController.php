@@ -4,10 +4,10 @@ namespace XelentAbrar\HospitalDonation\Http\Controllers\Donation;
 
 use Inertia\Inertia;
 use App\Models\UserRole;
-use XelentAbrar\HospitalDonation\Models\OPD\Donor;
+use XelentAbrar\HospitalDonation\Models\Donation\Donor;
 use XelentAbrar\HospitalDonation\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use XelentAbrar\HospitalDonation\Http\Requests\OPD\DonorRequest;
+use XelentAbrar\HospitalDonation\Http\Requests\Donation\DonorRequest;
 use XelentAbrar\HospitalDonation\Models\Accounts\ChartOfAccount;
 
 class DonorController extends Controller
