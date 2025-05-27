@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-ot'))) {
+        if(file_exists(base_path('config/ot.php'))) {
             Schema::table('operations', function (Blueprint $table) {
                 $table->string('donor_fee')->nullable();
                 $table->string('zf_fee')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-ot'))) {
+        if(file_exists(base_path('config/ot.php'))) {
             Schema::dropIfExists('operations');
         }
     }

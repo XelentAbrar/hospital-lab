@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('donors', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->enum("type", ["care_off", "zf"])->nullable();
-            $table->text("description", 1000)->nullable();
-            $table->text("address", 1000)->nullable();
-            $table->timestamps();
-        });
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::create('donors', function (Blueprint $table) {
+                $table->id();
+                $table->string("name");
+                $table->enum("type", ["care_off", "zf"])->nullable();
+                $table->text("description", 1000)->nullable();
+                $table->text("address", 1000)->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -30,6 +32,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donors');
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::dropIfExists('donors');
+        }
     }
 };

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('donors', function (Blueprint $table) {
-            $table->bigInteger('coa_id')->nullable();
-        });
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::table('donors', function (Blueprint $table) {
+                $table->bigInteger('coa_id')->nullable();
+            });
+        }
     }
 
     /**
@@ -21,8 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('donors', function (Blueprint $table) {
-            $table->dropColumn('coa_id');
-        });
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::table('donors', function (Blueprint $table) {
+                $table->dropColumn('coa_id');
+            });
+        }
     }
 };

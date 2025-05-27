@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('donor_funds', function (Blueprint $table) {
-            $table->id();
-            $table->float("charges",11,2)->nullable();
-            $table->unsignedBigInteger('donor_id')->nullable();
-            $table->timestamps();
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::create('donor_funds', function (Blueprint $table) {
+                $table->id();
+                $table->float("charges",11,2)->nullable();
+                $table->unsignedBigInteger('donor_id')->nullable();
+                $table->timestamps();
 
-            $table->foreign('donor_id')->references('id')->on('donors')->onDelete('set null');
-        });
+                $table->foreign('donor_id')->references('id')->on('donors')->onDelete('set null');
+            });
+        }
     }
 
     /**
@@ -30,6 +32,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donor_funds');
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::dropIfExists('donor_funds');
+        }
     }
 };

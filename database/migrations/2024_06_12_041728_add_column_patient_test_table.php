@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+        if(file_exists(base_path('config/lab.php'))) {
             Schema::table('patient_tests', function (Blueprint $table) {
                 $table->unsignedBigInteger('careoff_id')->nullable();
                 $table->unsignedBigInteger('zf_id')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+        if(file_exists(base_path('config/lab.php'))) {
             Schema::table('patient_tests', function (Blueprint $table) {
                 $table->dropColumn('careoff_id');
                 $table->dropColumn('zf_id');

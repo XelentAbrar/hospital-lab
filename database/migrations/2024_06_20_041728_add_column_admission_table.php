@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-ipd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             Schema::table('admissions', function (Blueprint $table) {
                 $table->unsignedBigInteger('careoff_id')->nullable();
                 $table->string('zf_fee')->nullable();

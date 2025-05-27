@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+        if(file_exists(base_path('config/lab.php'))) {
             Schema::table('patient_tests', function (Blueprint $table) {
                 $table->string('zf_fee')->nullable();
             });
         }
 
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             Schema::table('appointments', function (Blueprint $table) {
                 $table->string('zf_fee')->nullable();
             });
@@ -30,12 +30,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+        if(file_exists(base_path('config/lab.php'))) {
             Schema::table('patient_tests', function (Blueprint $table) {
                 $table->dropColumn('zf_fee');
             });
         }
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             Schema::table('appointments', function (Blueprint $table) {
                 $table->dropColumn('zf_fee');
             });

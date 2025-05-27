@@ -3,7 +3,7 @@
 namespace XelentAbrar\HospitalDonation\Http\Controllers\Donation;
 
 use Inertia\Inertia;
-use XelentAbrar\HospitalOpd\Models\OPD\Appointment;
+use App\Models\OPD\Appointment;
 use XelentAbrar\HospitalIpd\Models\IPD\Admission;
 use XelentAbrar\HospitalLab\Models\LAB\PatientTest;
 use XelentAbrar\HospitalDonation\Http\Controllers\Controller;
@@ -13,7 +13,7 @@ class ReportController extends Controller
     
     public function zfDetailReport()
     {
-        if (!file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+        if(!file_exists(base_path('config/hrms.php'))) {
             return null;
         }
         $appointment = new Appointment();
@@ -97,7 +97,7 @@ class ReportController extends Controller
         $to_time_only = date('H:i', strtotime($to_date));
         $searchTerm = request()->get('search', default: null);
 
-    if (file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+    if(file_exists(base_path('config/hrms.php'))) {
         $appointmentsQuery = Appointment::with(['careoff', 'patient', 'appointmentDetails', 'doctor'])
             ->where(function ($query) {
                 $query->whereNotNull('careoff_id')
@@ -121,7 +121,7 @@ class ReportController extends Controller
             ->orderBy('appointment_date', 'asc')
             ->orderBy('appointment_time', 'asc');
     }
-    if (file_exists(base_path('vendor/xelent-abrar/hospital-ipd'))) {
+    if(file_exists(base_path('config/hrms.php'))) {
 
         $admissionsQuery = Admission::with(['careoff', 'patient', 'details', 'details.service:id,name', 'details.doctor:id,name'])
             ->where(function ($query) {
@@ -146,7 +146,7 @@ class ReportController extends Controller
             ->orderBy('discharge_date', 'asc')
             ->orderBy('discharge_time', 'asc');
         }
-    if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+    if(file_exists(base_path('config/lab.php'))) {
         $patientTestsQuery = PatientTest::with([
             'careoff',
             'patient',
@@ -181,7 +181,7 @@ class ReportController extends Controller
     }
 
         if ($searchTerm) {
-            if (file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+            if(file_exists(base_path('config/hrms.php'))) {
                 $appointmentsQuery->where(function ($query) use ($searchTerm) {
                     $query->where('id', $searchTerm)
                         ->orWhere('patient_name', 'LIKE', '%' . $searchTerm . '%')
@@ -191,7 +191,7 @@ class ReportController extends Controller
                 });
             }
 
-            if (file_exists(base_path('vendor/xelent-abrar/hospital-ipd'))) {
+            if(file_exists(base_path('config/hrms.php'))) {
 
             $admissionsQuery->where(function ($query) use ($searchTerm) {
                 $query->where('id', $searchTerm)
@@ -202,7 +202,7 @@ class ReportController extends Controller
             });
             }
 
-            if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+            if(file_exists(base_path('config/lab.php'))) {
 
             $patientTestsQuery->where(function ($query) use ($searchTerm) {
                 $query->where('id', $searchTerm)
@@ -214,19 +214,19 @@ class ReportController extends Controller
             }
         }
 
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             $appointments = $appointmentsQuery->get();
         }
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-ipd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             $admissions = $admissionsQuery->get();
         }
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+        if(file_exists(base_path('config/lab.php'))) {
             $patientTests = $patientTestsQuery->get();
         }
 
         $combinedResults = collect();
 
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-opd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             foreach ($appointments as $appointment) {
                 $combinedResults->push([
                     'type' => 'Appointment',
@@ -241,7 +241,7 @@ class ReportController extends Controller
             }
         }
 
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-ipd'))) {
+        if(file_exists(base_path('config/hrms.php'))) {
             foreach ($admissions as $admission) {
                 $doctors = $admission->details->pluck('doctor.name')->filter()->join(', ');
                 $services = $admission->details->pluck('service.name')->filter()->join(', ');
@@ -260,7 +260,7 @@ class ReportController extends Controller
             }
         }
 
-        if (file_exists(base_path('vendor/xelent-abrar/hospital-lab'))) {
+        if(file_exists(base_path('config/lab.php'))) {
             foreach ($patientTests as $patientTest) {
                 $combinedResults->push([
                     'type' => 'Patient Test',

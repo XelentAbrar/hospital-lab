@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('donor_funds', function (Blueprint $table) {
-            $table->boolean('is_printed')->nullable();
-        });
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::table('donor_funds', function (Blueprint $table) {
+                $table->boolean('is_printed')->nullable();
+            });
+        }
     }
 
     /**
@@ -21,10 +23,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('donor_funds', function (Blueprint $table) {
+        if(file_exists(base_path('config/hrms.php'))) {
+            Schema::table('donor_funds', function (Blueprint $table) {
 
-            $table->dropColumn('is_printed');
+                $table->dropColumn('is_printed');
 
-        });
+            });
+        }
     }
 };
