@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+            $table->dateTime('date_report_verification')->nullable();
+            $table->text('remarks')->nullable();
+            $table->string('chart_no')->nullable();
         });
     }
 
@@ -22,9 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('patient_tests', function (Blueprint $table) {
-
-            $table->dropColumn('is_printed');
-
+            $table->dropColumn('date_report_verification');
+            $table->dropColumn('remarks');
+            $table->dropColumn('chart_no');
         });
     }
 };

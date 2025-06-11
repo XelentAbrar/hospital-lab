@@ -11,22 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(file_exists(base_path('config/donation.php'))) {
-            Schema::table('patient_tests', function (Blueprint $table) {
-                $table->string('zf_fee')->nullable();
+        if(file_exists(base_path('config/accounts.php'))) {
+            Schema::table('lab_tests', function (Blueprint $table) {
+                $table->bigInteger('coa_id')->nullable();
             });
         }
-
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        if(file_exists(base_path('config/donation.php'))) {
-            Schema::table('patient_tests', function (Blueprint $table) {
-                $table->dropColumn('zf_fee');
+        if(file_exists(base_path('config/accounts.php'))) {
+            Schema::table('lab_tests', function (Blueprint $table) {
+                $table->dropColumn('coa_id');
             });
         }
     }

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+        Schema::create('sub_packages', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->enum("status", ['active', 'inactive'])->nullable();
+            $table->float("price")->default(0);
+          $table->timestamps();
         });
     }
 
@@ -21,10 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-
-            $table->dropColumn('is_printed');
-
-        });
+        Schema::dropIfExists('sub_packages');
     }
 };

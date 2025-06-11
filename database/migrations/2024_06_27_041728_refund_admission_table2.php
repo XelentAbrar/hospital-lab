@@ -8,23 +8,27 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
+
         Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+            $table->string('patient_age')->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('patient_tests', function (Blueprint $table) {
-
-            $table->dropColumn('is_printed');
-
+            $table->dropColumn('patient_age');
         });
     }
 };
+

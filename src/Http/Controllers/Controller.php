@@ -1,6 +1,6 @@
 <?php
 
-namespace XelentAbrar\HospitalDonation\Http\Controllers;
+namespace XelentAbrar\HospitalLab\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;

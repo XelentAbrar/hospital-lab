@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+        Schema::table('test_general_details', function (Blueprint $table) {
+            $table->foreignId("lab_test_detail_id")->nullable()->index()->references('id')->on('lab_test_details')->onDelete('set null');
         });
     }
 
@@ -21,10 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-
-            $table->dropColumn('is_printed');
-
+        Schema::table('test_general_details', function (Blueprint $table) {
+           $table->dropColumn('lab_test_detail_id');
         });
     }
 };

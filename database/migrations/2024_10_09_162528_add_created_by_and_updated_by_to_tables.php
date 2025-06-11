@@ -11,32 +11,30 @@ return new class extends Migration
      */
     public function up()
     {
-        if(file_exists(base_path('config/hrms.php'))) {
-            $tables = [
-                'donor_funds'
-            ];
+        $tables = [
+            'patient_tests',
+            'lab_tests',
+        ];
 
-            foreach ($tables as $table) {
-                Schema::table($table, function (Blueprint $table) {
-                    $table->integer('created_by')->nullable();
-                    $table->integer('updated_by')->nullable();
-                });
-            }
+        foreach ($tables as $table) {
+            Schema::table($table, function (Blueprint $table) {
+                $table->integer('created_by')->nullable();
+                $table->integer('updated_by')->nullable();
+            });
         }
     }
 
     public function down()
     {
-        if(file_exists(base_path('config/hrms.php'))) {
-            $tables = [
-                'donor_funds',
-            ];
+        $tables = [
+            'patient_tests',
+            'lab_tests',
+        ];
 
-            foreach ($tables as $table) {
-                Schema::table($table, function (Blueprint $table) {
-                    $table->dropColumn(['created_by', 'updated_by']);
-                });
-            }
+        foreach ($tables as $table) {
+            Schema::table($table, function (Blueprint $table) {
+                $table->dropColumn(['created_by', 'updated_by']);
+            });
         }
     }
 };

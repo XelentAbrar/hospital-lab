@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+        Schema::table('test_general_details', function (Blueprint $table) {
+            $table->unsignedBigInteger('sub_package_id')->nullable();
+            $table->foreign('sub_package_id')->references('id')->on('sub_packages')->onDelete('set null');
+
         });
     }
 
@@ -21,9 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
+        Schema::table('test_general_details', function (Blueprint $table) {
 
-            $table->dropColumn('is_printed');
+            $table->dropColumn('sub_package_id');
 
         });
     }

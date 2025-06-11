@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+        Schema::table('widal_tests', function (Blueprint $table) {
+            $table->decimal("charges")->nullable()->after('name');
         });
     }
 
@@ -21,10 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('patient_tests', function (Blueprint $table) {
-
-            $table->dropColumn('is_printed');
-
+        Schema::table('widal_tests', function (Blueprint $table) {
+            $table->dropColumn('charges');
         });
     }
 };

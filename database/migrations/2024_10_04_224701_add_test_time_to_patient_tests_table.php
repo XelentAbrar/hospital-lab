@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('patient_tests', function (Blueprint $table) {
-            $table->longText(column: "is_printed")->nullable();
+         $table->string('test_time')->nullable();
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     {
         Schema::table('patient_tests', function (Blueprint $table) {
 
-            $table->dropColumn('is_printed');
+            $table->dropColumn('test_time');
 
         });
     }

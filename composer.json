@@ -1,17 +1,17 @@
 {
-  "name": "xelent-abrar/hospital-donation",
-  "description": "A Laravel package to manage donation.",
+  "name": "xelent-abrar/hospital-lab",
+  "description": "A Laravel package to manage lab.",
   "type": "library",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "XelentAbrar\\HospitalDonation\\": "src/"
+      "XelentAbrar\\HospitalLab\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "XelentAbrar\\HospitalDonation\\HospitalDonationServiceProvider"
+        "XelentAbrar\\HospitalLab\\HospitalLabServiceProvider"
       ]
     }
   },
